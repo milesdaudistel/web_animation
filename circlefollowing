@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;" onmousemove="drawCircle(event)">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+function drawCircle(e) {
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d");
+    
+    ctx.clearRect(0, 0, 300, 150);
+    
+    var x = e.clientX;
+    var y = e.clientY;
+    
+	ctx.beginPath();
+	ctx.arc(x, y, 50, 0, 2 * Math.PI);
+	ctx.stroke();
+    }
+
+</script> 
+
+</body>
+</html>

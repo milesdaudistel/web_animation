@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript in Body</h2>
+
+<p id="demo"></p>
+
+<script>
+var length = 8;
+
+
+//board[i][j] prints the jth entry of list i
+//board[i] will print the entire i'th row
+//therefore, its board[y][x]
+
+
+var board = new Array(length);
+for (var y = 0; y < length; y++) {
+  board[y] = new Array(length);
+  for (var x = 0; x < length; x++) {
+  	var oddsquare = (x+y) % 2;
+    
+  	if (oddsquare == 1 && y < length / 2 - 1) {
+    	board[y][x] = "B";
+    } else if (oddsquare == 1 && y > length / 2) {
+    	board[y][x] = "R";
+    } else {
+    	board[y][x] = "-";
+    }
+  }
+}
+
+
+function print_board(b) {
+		var printme = "";
+        for (var y = 0; y < length; y++) {
+                printme += b[y].toString() + "<br>";
+        }
+        document.getElementById("demo").innerHTML = printme;
+}
+
+print_board(board)
+
+
+
+
+</script>
+
+</body>
+</html> 

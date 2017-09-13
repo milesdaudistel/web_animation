@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width=screen.availWidth height=screen.height style="border:0px solid #d3d3d3;" onmousemove="drawCircle(event)">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+//create canvas
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+var circleX = 150;
+var circleY = 75;
+var radius = 50;
+var buffer = 20;
+var mouseWidth = 30;
+
+var mouseX = 0;
+var mouseY = 0;
+
+//do initial draw
+ctx.beginPath();
+ctx.arc(circleX, circleY, radius, 0, 2 * Math.PI);
+ctx.stroke();
+ctx.fillStyle = "yellow";
+ctx.fill();
+
+ctx.font = "15px Arial";
+ctx.strokeText("Berkeley", circleX-30, circleY+2);
+ctx.strokeText("Haas", circleX-18, circleY+17);
+
+//circle is redrawn when mouse is within certain range
+function drawCircle(e) {
+    //get new mouse coordinates
+    var dX = e.clientX - mouseX;
+    var dY = e.clientY - mouseY;
+    
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    //change coordinates of where circle will be drawn
+    if (touching(mouseX, mouseY, circleX, circleY, radius+buffer)) {
+    	//update circle position
+    	circleX += dX;
+    	circleY += dY;
+        }
+        
+    //clear the entire canvas
+    ctx.clearRect(0, 0, 300, 150);
+
+    //redraw the circle and the 'me' next to cursor
+    ctx.beginPath();
+    ctx.arc(circleX, circleY, 50, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+    ctx.strokeText("Berkeley", circleX-30, circleY+2);
+    ctx.strokeText("Haas", circleX-18, circleY+17);
+    
+    ctx.strokeText("Me", mouseX-mouseWidth, mouseY);
+    
+
+    }
+
+//returns true if mouse is within certain range of circle
+function touching(x, y, cX, cY, r) {
+	return (Math.abs(cX-x) < r && Math.abs(cY-y) < r);
+    }
+
+</script> 
+
+</body>
+</html>
